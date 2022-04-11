@@ -1,0 +1,261 @@
+
+
+# Annoucements
+
+1. Assignment 7 scores are now on Gradebook.
+1. Assignment 8 scores are being marked, will appear on tunitin, please check.
+1. Highly recommended to send in your teaching feedback - I appreciate it greatly!
+1. Next week is a recap tutorial; But will be rescheduled.
+
+::: columns
+
+:::: {.column width=30%}
+<!-- ![T14](1300.png){ width=100% } -->
+::::
+:::: {.column width=30%}
+<!-- ![T15](1500.png){ width=100% } -->
+::::
+:::: {.column width=30%}
+<!-- ![T16](1600.png){ width=100% } -->
+::::
+
+:::
+
+# Student Feedback on Teaching (SFT)
+
+Feedback is *optional* but *highly encouraged*, access here: **[https://es.nus.edu.sg/blue/](https://es.nus.edu.sg/blue/)**
+
+* **[Tutorial Feedback]** Your feedback is important to me, and will be used to improve my teaching.
+  * If I have helped your learning in any way, your positive feedback will be an encouragement to me.
+  * If you find your learning can be enhanced by some action on my part, that feedback will be used to improve my teaching.
+* **[Module Feedback]** Your feedback will be used to improve the module.
+* Feedback is confidential to the university and anonymous to us.
+* Avoid mixing the feedback; ie. project feedback to tutorial feedback.
+
+Past student feedback had been used to improve teaching; ie. Telegram access to provide faster feedback.
+I would greatly appreciate your feedback, especially this is my first time teacing AI.
+
+# Recap tutorial
+
+* Tutorial will be rescheduled due to college well-being day; 
+  * I will consolidate the 3 tutorials into 1 or 2.
+  * Select all that you are avaliable: **Apr 13, 3-4pm or 4-5pm or 5-6pm.**
+* Prof Daren will upload a review tutorial: No assignment questions & $4$ past yr qns.
+* I have decided to help all of you with a special recap; two options
+  1. Recap one topic + Quickly go through the $4$ past year questions
+  1. Go through 4 past year questions + Time for Q&A at the end
+
+![Vote Now - [https://forms.gle/xCiVFZKmyE93NTPFA](https://forms.gle/xCiVFZKmyE93NTPFA)](vote.png){ width=20% }
+
+# Previously from T08, Q1
+
+Consider below, a Vertex Cover where it is a set of vertices that covers all edges.
+
+::: columns
+
+:::: {.column width=50%}
+
+i. Write down the constraints as logical statements for a vertex cover of size 1.
+i. Apply the resolution algorithm in order to prove that the vertex 1 must be part of the vertex cover.
+
+## Recap
+
+* What is a Vertex Cover of size $k$?
+* How to formulate a $KB$ problem?
+
+::::
+:::: {.column width=50%}
+~~~{.mermaid format=svg caption="Graph for Vertex Cover CSP"}
+flowchart LR
+2---1---3
+1---4
+~~~
+::::
+
+:::
+
+---
+
+## Answer T8.Q1.i - Formulating KB
+
+**Variables**: 
+
+* $x_i$ represents $i$ node on the graph that is in the vertex cover.
+* $\neg x_i$ represents not in the vertex cover.
+
+**Constraints**: 
+
+* Edge cover constraints: $x_1 \vee x_2$; $x_1 \vee x_3$; $x_1 \vee x_4$
+* Size $k = 1$ constraints: (We ignore contrapositive)
+  * $x_1$ set then... $x_1\implies\neg x_2$; $x_1\implies\neg x_3$; $x_1\implies\neg x_4$
+  * $x_2$ set then... $x_2\implies\neg x_3$; $x_2\implies\neg x_4$;
+  * $x_3$ set then... $x_3\implies\neg x_4$
+
+Then convert to CNF!
+
+ ---
+
+## Answer T8.Q1.ii
+
+Show $KB\models \alpha = x_1$; we resolve $KB\wedge \neg x_1$
+
+1. $\neg x_1 \oplus x_1 \vee x_2 \implies x_2$
+1. $x_2 \oplus \neg x_2 \vee \neg x_3 \implies \neg x_3$
+1. $\neg x_1 \oplus x_1 \vee x_3 \implies x_3$
+1. $x_3 \oplus \neg x_3 \implies \square$
+
+# Question 1
+
+Having both good grades (G) and good communication skills (C) will increase your chances of performing well in your interview (I).
+
+::: columns
+
+:::: {.column width=70%}
+
+Table: Probability of $I$; $Pr[G=1]=0.7, Pr[C=1]=0.2$
+
+$G$|$C$|$Pr[I=1|G,C]$
+:-:|:-:|:-:
+1|1|0.9
+1|0|0.5
+0|1|0.5
+0|0|0.1
+
+::::
+:::: {.column width=30%}
+~~~{.mermaid format=svg caption="Belief Network"}
+flowchart LR
+G-->I
+C-->I
+~~~
+::::
+
+:::
+
+## Recap
+
+* How to read a Bayes Network?
+* What is Marginalisation?
+
+ ---
+
+## Answer
+
+What is the probability that
+
+a. Alice, who has poor grades and communication skills, performs well on her interview? - $Pr[I = 1|G = 0, C = 0] = 0.1$
+b. Bob is a student with great communication skills, assuming we do not know anything about him? - $Pr[C = 1] = 0.2$
+c. A student has good communication skills, given that he or she has performed well in an interview? - $Pr[C = 1|I = 1]=\frac{Pr[C = 1, I = 1]}{Pr[I = 1]}=\frac{\sum_g Pr[G=g, C = 1, I = 1]}{\sum_{g,c} Pr[G=g, C = c,I = 1]} = 0.339$
+    a. Are good communication skills independent of good performance in an interview? - Remember independence; $Pr[C = 1|I = 1] \neq Pr[C = 1]$.
+
+# Question 2
+
+Assume that 2\% of the population in a country carry a particular virus ($Y$ is a carrier). 
+A test kit developed to detect the presence ($X$ is positive test).
+
+$Y$|$Pr[X=1|Y]$
+:-:|:-:
+1|0.998
+0|$1-0.996=0.004$
+
+## Recap
+
+* What is Conditional Probability?
+* What is Conditional Independence?
+
+ . . . 
+
+Careful with the conditional independence here...
+
+--- 
+
+## Answer 2a
+
+Given that a patient is tested to be positive using this kit, what is the posterior belief that he is not a carrier?
+
+$Pr[Y=0|X=1] = \frac{Pr[Y=0, X=1]}{Pr[X=1]} = \frac{Pr[Y=0, X=1]}{\sum_y Pr[Y=y,X=1]} = \frac{Pr[X=1|Y=0]\times Pr[Y=0]}{\sum_y Pr[Y=y,X=1]} = 0.164$
+
+## Answer 2b
+
+Patient tested positive again using the second kit ($X_2$ is the second test, $X_1$ is the first test).
+Assume conditional independence between results of different test kits given the patient’s state of virus contraction.
+
+$Pr[Y=0|X_1=1, X_2=1] = 0.0008$ 
+
+* $= \frac{Pr[Y=0, X_2=1,X_1=1]}{Pr[X_1=1, X_2=1]}= \frac{Pr[X_2=1,X_1=1|Y=0]Pr[Y=0]}{Pr[X_1=1, X_2=1]}$ (Conditional Probability)
+* $= \frac{Pr[X_2=1|Y=0]Pr[X_1=1|Y=0]Pr[Y=0]}{Pr[X_1=1, X_2=1]}$ (Conditional Independence)
+* $= \frac{Pr[X_2=1|Y=0]Pr[X_1=1|Y=0]Pr[Y=0]}{\sum_y Pr[X_1=1, X_2=1, Y=y]}$ (Marginalisation)
+* $= \frac{Pr[X_2=1|Y=0]Pr[X_1=1|Y=0]Pr[Y=0]}{\sum_y Pr[X_1=1 | Y=y]Pr[X_2=1 | Y=y]Pr[Y=y]}$ (Conditional Probability, Independence)
+
+# Question 3
+
+Construct a Bayesian network and determine the probability
+
+$$Pr[WG=1, RS=1, R=0, S=0]$$
+
+## Recap
+
+* Any useless variables from the table?
+
+---
+
+## Answer
+
+**Lemma 1.** Given two random boolean variables A and B, if $Pr[A | B] = 0$ and $Pr[A | \neg B] = 1$ then $Pr[A] = 1-Pr[B]$; in fact, $A \equiv \neg B$. 
+
+Not difficult to proof (*Note the notation change.*):
+
+$$
+Pr[A | B] = 0 \wedge Pr[A | \neg B] = 1 \implies Pr[A] = 1-Pr[B]
+$$
+
+$Pr[A]$
+
+* $=Pr[A \wedge B] + Pr[A \wedge \neg B]$ (Marginalisation)
+* $=Pr[A | B]\times Pr[B] + Pr[A | \neg B]\times Pr[\neg B]$ (Conditional Probability)
+* $=Pr[\neg B]=1-Pr[B]$ (Subt given)
+
+So, $Pr[A \wedge \neg B \wedge \cdots] = Pr[\cdots| A \wedge \neg B] \times Pr[A \wedge \neg B] = Pr[\cdots|A]\times Pr[A]$,
+
+* Since, $Pr[A \wedge \neg B] = Pr[A | \neg B]\times Pr[\neg B] = Pr[A]$; 
+* And, $Pr[\cdots| A \wedge \neg B] = Pr[\cdots\wedge \neg B| A] / Pr[\neg B| A ] = Pr[\cdots| A]$
+
+---
+
+::: columns
+
+:::: {.column width=35%}
+
+Since $S\equiv \neg RS$, so:
+
+~~~{.mermaid format=svg caption="RS, WG, R network."}
+flowchart LR
+RS-->R-->WG
+RS-->WG
+~~~
+::::
+:::: {.column width=22%}
+$Pr[RS=1] = 0.7$
+
+$RS$|$Pr[R=1|RS]$
+:-:|:-:
+1|0.9
+0|0.1
+::::
+:::: {.column width=35%}
+$RS$|$R$|$Pr[WG=1|RS,R]$
+:-:|:-:|:-:
+1|1|0.8
+1|0|0.1
+0|1|0.95
+0|0|0.9
+::::
+:::
+
+
+
+$Pr[WG=1, RS=1, R=0, S=0] =Pr[WG=1, RS=1, R=0]$
+
+* $=Pr[WG=1, R=0|RS=1]\times Pr[RS=1]$ (Conditional Probability)
+* $=Pr[WG=1 |RS=1,R=0]\times Pr[R=0|RS=1] \times Pr[RS=1]$ (Cond. Prob.)
+* $= 0.1 \times (1-0.9) \times 0.7 = 0.007$
